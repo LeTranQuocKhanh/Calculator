@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, TextInput, FlatList, Platform } from 'react-native';
+import { Text, TouchableOpacity, View, TextInput, FlatList } from 'react-native';
 import {vw, vh} from 'react-native-expo-viewport-units'
 
 export default function Home()
