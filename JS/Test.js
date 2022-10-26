@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, TextInput, FlatList, Platform } from 'react-native';
 import {vw, vh} from 'react-native-expo-viewport-units'
 
@@ -11,8 +10,6 @@ export default function Home()
 
     const [calculation, setCalculations] = useState("")
     const [answer, setAnswer] = useState('')
-    const [expression, set_expression] = useState('');
-    const [lastSymbol, setLastSymbol] = useState("")
     const [history, set_history] = useState([])
     const [search_history, set_search_history] = useState([...history])
 
@@ -23,7 +20,7 @@ export default function Home()
     
     const Item = ({ title }) => (
         <View>
-          <Text style={{color: 'black', fontSize: 30}}>{title}</Text>
+          <Text style={{color: 'white', fontSize: 30}}>{title}</Text>
         </View>
       );
     function updateCalc(symb)
@@ -64,19 +61,9 @@ export default function Home()
     
     return(
         <View style={{height: vh(100), backgroundColor: bg}}>
-            
-            <View style={{position: 'absolute', top: 100, right: 30}}>
-                <Text style={{color: txtColor, fontSize: 40, fontWeight: 'bold', opacity: 0.5}}>{calculation}</Text>
-            </View>
-
-            <View style={{position: 'absolute', top: 150, right: 30}}>
-                <Text style={{color: txtColor, fontSize: 50, fontWeight: 'bold', opacity: 1}}>{answer}</Text>
-            </View>
-
-            <View style={{position: 'absolute', width: vw(65), height: vh(60), backgroundColor: '#ffffff', flexDirection: 'row', flexWrap: 'wrap', bottom: -15, right: 0, justifyContent: 'center', alignItems: 'center'}}>
-            <View style = {{position: 'absolute', top: 20, left: 20, width: vw(60), borderStyle: 'solid', borderColor: 'red', borderWidth: 5, flexDirection: 'row', flexWrap: 'wrap'}}>
-            <TextInput placeholder='Type to search'
-                style={{flex: 1, height: 35, fontSize: 27}}
+            <View style = {{position: 'absolute', top: 20, left: 20, width: vw(96.5), borderStyle: 'solid', borderColor: 'red', borderWidth: 5, flexDirection: 'row', flexWrap: 'wrap'}}>
+            <TextInput placeholder='Nhập biểu thức hoặc kết quả cần tìm kiếm ở đây'
+                style={{flex: 1, height: 35, fontSize: 27, color: 'white'}}
                 onChangeText={searchString =>{
                     var a = history.filter(value =>{
                     return ( value.expression.includes(
@@ -89,7 +76,19 @@ export default function Home()
                 }
             }/> 
             </View>
-            <View style ={{position: 'absolute', top: 60, left: 20, width: vw(65)}}>
+            <View style={{position: 'absolute', top: 100, right: 30}}>
+                <Text style={{color: txtColor, fontSize: 40, fontWeight: 'bold', opacity: 0.5}}>{calculation}</Text>
+            </View>
+
+            <View style={{position: 'absolute', top: 150, right: 30}}>
+                <Text style={{color: txtColor, fontSize: 50, fontWeight: 'bold', opacity: 1}}>{answer}</Text>
+            </View>
+
+            <View style={{position: 'absolute', width: vw(65), height: vh(60), backgroundColor: bg, flexDirection: 'row', flexWrap: 'wrap', bottom: -15, right: 0, justifyContent: 'center', alignItems: 'center', borderStyle: 'solid', borderColor: 'orange', borderWidth: 5}}>
+            <text style={{position: 'absolute', top: 0, fontSize: 30, color: 'red'}}>
+                Lịch sử tính toán và kết quả tìm kiếm
+            </text>
+            <View style ={{position: 'absolute', top: 40, left: 20, width: vw(65)}}>
             <FlatList
                 data={search_history}
                 renderItem={renderItem}
